@@ -12,6 +12,7 @@ from starlette.responses import JSONResponse
 from starlette.routing import Mount, Route
 
 from app.services.slack_service import SlackError, SlackService
+from app.capability_bind import bind_declared_capabilities
 
 logger = logging.getLogger(__name__)
 
@@ -134,6 +135,9 @@ Outputs: success
     except SlackError as e:
         return {"success": False, "error": e.to_dict()}
 
+
+
+bind_declared_capabilities(mcp)
 
 _base_app = mcp.http_app()
 
